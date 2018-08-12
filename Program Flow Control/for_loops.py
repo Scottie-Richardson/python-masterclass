@@ -38,13 +38,13 @@ print('', end="\n\n")
 
 # Print all numbers divisible by 7 from 0 to 100
 for i in range(0, 101):
-    if (i%7) == 0:
+    if (i % 7) == 0:
         print(i, end=" ")
 print('', end='\n\n')
 
 # Use continue, break and else to skip items being itterated over or exit the loop
 foodItems = ["egg", "bacon", "spam", "cheese"]
-nastyFoodItem = ''
+nasty_food_item = ''
 
 for item in foodItems:
     if item == 'spam':
@@ -53,10 +53,10 @@ for item in foodItems:
 
 for item in foodItems:
     if item == 'spam':
-        nastyFoodItem = item
+        nasty_food_item = item
         break
 else:
     print("I will have that please!")
 
-if nastyFoodItem == 'spam':
+if nasty_food_item == 'spam':
     print("Can I please have something without spam?")

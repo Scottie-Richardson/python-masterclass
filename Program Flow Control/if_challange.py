@@ -9,6 +9,7 @@ name = input("Please enter your name: ")
 age = int(input("How old are you {0}? ".format(name)))
 
 if 18 <= age <= 30:
-  print("Welcome to the holiday {0}".format(name))
+    print("Welcome to the holiday {0}".format(name))
 else:
-  print("Sorry {0}, you must be between 18 and 30 to participate in this holiday.".format(name))
+    print(
+        "Sorry {0}, you must be between 18 and 30 to participate in this holiday.".format(name))
