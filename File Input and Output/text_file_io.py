@@ -8,10 +8,13 @@ for line in test_file:
     print(line, end="")
 
 test_file.close()
+# Unlike most languages it is not nessicary to test for the EOF (end of file)
 
 print("#" * 50, end="\n\n")
 
-# Another way to open a file in Python is using the with statment
+# Another way to open a file in Python is using the with statment.
+# When using the with statment python automatically closes the
+# file when it reaches the end
 with open('File Input and Output\\sample.txt', 'r') as test_file:
     for line in test_file:
         if "JABB" in line.upper():
