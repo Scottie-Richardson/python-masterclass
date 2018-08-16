@@ -1,0 +1,98 @@
+*** Syntax ***
+    --> print() - Outputs to the console screen
+
+    --> input("Optional message to user") - accepts a user input
+
+    --> # - Starts a line comment
+
+    --> When creating a string that may need many characters escaped, its better
+        to use triple quotes
+            """ He was going to the store\bakery, but then...
+                "Stop!!" yelled Bob. """
+
+    --> Escape Characters:
+            \n - New Line           \\ - Slash          \" - Double Quotes
+            \t - Tab                \' - Single Quotes
+
+    --> Variables in Python are case sensitive, and can start with either a
+        letter, or an underscore
+
+    --> When you use the divide operator the result is returned as a float even
+        if it was two integers being divided
+            --> You can force the return to be an integer if you use // insetad
+                of the single divide character
+
+    --> You can access elements in a string as if they were an array
+            var = "Hello there!"
+            var[1] --> This will return: 'e'
+
+    --> String Slices
+            var = "Hello there! It's a beautiful day!"
+            var[1:5]    --> This is a slice starting at index 1 and has a length
+                            of 5, i.e. it will return: 'ello '
+            var[:6]     --> This will return: 'hello '
+            var[3:]     --> This will return: 'lo there! It's a beautiful day!'
+            var[0:10:2] --> This will return: 'Hlotee tsab'
+            var[1::3]   --> This will return: 'eoheIs aila'
+
+    --> String Formatting
+        --> To use variables in a string that are not strings themselves you
+            have to cast the type to a string
+                print("Hello sir, there are " + str(some_int) + " people here!")
+
+        --> Or if you have multiple variables to insert you can use {#} or {}.
+            If you use the variables out of order, then you have to number them,
+            but if you use the variables in order the numbers within the {} are
+            not nessicary.
+                print("Hello sir, there are {} people here! And we have {} appitizers available.").format(some_int, different_int)
+
+        --> You can also specify the "space" that a variable in a string will take up
+                print("Hello sir, there are {:4} people here! And we have {:3} appitizers available.").format(some_int, different_int)
+
+        --> You can also justify the content to the left
+                print("Hello sir, there are {:<4} people here! And we have {:<3} appitizers available.").format(some_int, different_int)
+
+    --> Conditionals
+        --> if (statment):
+                code to execute
+            elif (statment):
+                code to execute
+            else:
+                code to execute
+
+        --> (X and Y) - Both must evaluate to true inorder to return true
+        --> (X or Y)  - One must evaluate to true inorder to return true
+        --> (X in Y)  - Y must contain X inorder to return true
+        --> (not X)   - X must false inorder to return true
+
+    --> Loops
+        --> For loops can utilize a range of data types as long as they are iterable
+            i.e. strings, lists, ranges, tuples, etc.
+                list = ['happy', 'sad', 'meh', 'excited', 'afraid']
+                for state in list:
+                    print("You are " + state)
+
+            --> The range function always returns one less than the stated number
+                    evens = list(range(0, 21, 2))
+                    print(evens)    --> This will print: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+                --> However...
+                    evens = list(range(0, 20, 2))
+                    print(evens)    --> This will print: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+        --> While loops
+                while (i < 10):
+                    code to execute
+                    i += 1  --> increment i
+
+        --> Both for loops and while loops also have access to continue, break and else statments
+            that can be used to pass over unwanted or unessicary data
+                while (i < 10):
+                    if (condition check):
+                        continue
+                    elif (another check):
+                        break
+                    i += 1  --> increment i
+                else:
+                    code to execute
+    --> 
