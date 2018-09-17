@@ -120,6 +120,10 @@ def new_game():
     deal_player()
 
 
+def play():
+    main_window.mainloop()
+
+
 main_window = tkinter.Tk()
 
 # Set up the screen and frames for the dealer and player
@@ -170,4 +174,5 @@ load_cards(cards)
 
 new_game()
 
-main_window.mainloop()
+if __name__ == "__main__":
+    play()
