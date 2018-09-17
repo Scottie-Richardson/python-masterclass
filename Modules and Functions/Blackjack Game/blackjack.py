@@ -32,11 +32,11 @@ def load_cards(card_images):
 
 
 def deal_card(frame):
-    # pop the next card off the top of the deck
+    # Pop the next card off the top of the deck
     next_card = deck.pop(0)
-    # add the image to a Label and display the label
+    # Add the image to a Label and display the label
     tkinter.Label(frame, image=next_card[1], relief='raised').pack(side='left')
-    # now return the card's face value
+    # Return the card's face value
     return next_card
 
 
@@ -51,7 +51,7 @@ def score_hand(hand):
             ace = True
             card_value = 11
         score += card_value
-        # if we would bust, check if there is an ace and subtract 10
+        # If the player would bust, check if there is an ace and subtract 10
         if score > 21 and ace:
             score -= 10
             ace = False
@@ -84,6 +84,42 @@ def deal_player():
     if player_score > 21:
         result_text.set("Dealer Wins!")
 
+
+def new_game():
+    global cards
+    global deck
+    global dealer_hand
+    global player_hand
+    global dealer_card_frame
+    global player_card_frame
+    result_text.set("")
+
+    dealer_card_frame.destroy()
+    player_card_frame.destroy()
+
+    # Embedded frame to hold the card images for dealer
+    dealer_card_frame = tkinter.Frame(card_frame, background="green")
+    dealer_card_frame.grid(row=0, column=1, sticky="ew", rowspan=2)
+
+    # Embedded frame to hold the card images for player
+    player_card_frame = tkinter.Frame(card_frame, background="green")
+    player_card_frame.grid(row=2, column=1, sticky='ew', rowspan=2)
+
+    # Create a new deck of cards and shuffle them
+    deck = list(cards)
+    random.shuffle(deck)
+
+    # Create the list to store the dealer's and player's hands
+    dealer_hand = []
+    player_hand = []
+
+    # Initialize the game
+    deal_player()
+    dealer_hand.append(deal_card(dealer_card_frame))
+    dealer_score_label.set(score_hand(dealer_hand))
+    deal_player()
+
+
 main_window = tkinter.Tk()
 
 # Set up the screen and frames for the dealer and player
@@ -98,44 +134,40 @@ result.grid(row=0, column=0, columnspan=3)
 card_frame = tkinter.Frame(main_window, relief="sunken", borderwidth=1, background="green")
 card_frame.grid(row=1, column=0, sticky='ew', columnspan=3, rowspan=2)
 
+# Create dealer labels
 dealer_score_label = tkinter.IntVar()
 tkinter.Label(card_frame, text="Dealer", background="green", fg='white').grid(row=0, column=0)
 tkinter.Label(card_frame, textvariable=dealer_score_label, background="green", fg="white").grid(row=1, column=0)
-# embedded frame to hold the card images for dealer
+
+# Create player labels
+player_score_label = tkinter.IntVar()
+tkinter.Label(card_frame, text="Player", background="green", fg="white").grid(row=2, column=0)
+tkinter.Label(card_frame, textvariable=player_score_label, background="green", fg="white").grid(row=3, column=0)
+
+# Embedded frame to hold the card images for dealer
 dealer_card_frame = tkinter.Frame(card_frame, background="green")
 dealer_card_frame.grid(row=0, column=1, sticky="ew", rowspan=2)
 
-player_score_label = tkinter.IntVar()
-
-tkinter.Label(card_frame, text="Player", background="green", fg="white").grid(row=2, column=0)
-tkinter.Label(card_frame, textvariable=player_score_label, background="green", fg="white").grid(row=3, column=0)
-# embedded frame to hold the card images for player
+# Embedded frame to hold the card images for player
 player_card_frame = tkinter.Frame(card_frame, background="green")
 player_card_frame.grid(row=2, column=1, sticky='ew', rowspan=2)
 
 button_frame = tkinter.Frame(main_window)
 button_frame.grid(row=3, column=0, columnspan=3, sticky='w')
 
-dealer_button = tkinter.Button(button_frame, text="    Stay    ", command=deal_dealer)
+dealer_button = tkinter.Button(button_frame, text="        Stay        ", command=deal_dealer)
 dealer_button.grid(row=0, column=0)
 
-player_button = tkinter.Button(button_frame, text="     Hit    ", command=deal_player)
-player_button.grid(row=0, column=3)
+player_button = tkinter.Button(button_frame, text="        Hit        ", command=deal_player)
+player_button.grid(row=0, column=1)
 
-# load cards
+new_game_button = tkinter.Button(button_frame, text="      New Game      ", command=new_game)
+new_game_button.grid(row=0, column=2)
+
+# Load cards
 cards = []
 load_cards(cards)
-# Create a new deck of cards and shuffle them
-deck = list(cards)
 
-random.shuffle(deck)
-
-# Create the list to store the dealer's and player's hands
-dealer_hand = []
-player_hand = []
-
-deal_player()
-dealer_hand.append(deal_card(dealer_card_frame))
-deal_player()
+new_game()
 
 main_window.mainloop()
