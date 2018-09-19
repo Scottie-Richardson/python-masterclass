@@ -1,0 +1,9 @@
+This file contains the basics of OOP (object oriented programming) in Python.
+
+It also serves as an introduction to documenting code in a more through way than
+    simple comments using Python DocStrings which are contained within two sets
+    of three double quotes for example:
+            """ This is a DocString """
+
+This portion of the section also begins touching on encaptualization, but it
+    will be explored more throughly in the later patrs of this section.
