@@ -1,0 +1,79 @@
+To start the SQLite shell from the command line:
+        sqlite3
+
+To open a database:
+        sqlite3 DB_Name
+            OR
+        .open DB_Name
+
+To display the column names at the beginning of the data:
+        .headers on
+            *** This must be entered before opening the database in order to see the column names ***
+
+To view a full list of supported commands:
+        .help
+
+Other than the supported list of commands, you can run SQL statments directly in the terminal shell:
+        CREATE TABLE contacts (name text, phone integer, email text);
+        INSERT INTO contacts (name, phone, email) VALUES('Scottie', 1234567890, 'scottie@email.com');
+        INSERT INTO contacts (name, phone, email) VALUES('Archer', 2234567890, 'archer@email.com');
+        INSERT INTO contacts (name, phone, email) VALUES('Lana', 3234567890, 'lana@email.com');
+        INSERT INTO contacts (name, phone, email) VALUES('Krieger', 4234567890, 'krieger@email.com');
+        INSERT INTO contacts (name, phone, email) VALUES('Rick', 5234567890, 'rick@email.com');
+        INSERT INTO contacts (name, phone, email) VALUES('Morty', 6234567890, 'morty@email.com');
+        SELECT * FROM contacts;
+
+SQLite does not prevent you from adding incorrect data types into a database table:
+        INSERT INTO contacts (name, phone, email) VALUES('John', '+1 (312) 111-1111', 'snow@email.com');
+        SELECT * FROM contacts;
+
+To see the structure of the tables within a database:
+        .schema
+
+Query a database:
+        SELECT * FROM songs
+        ORDER BY album, track;
+
+A more complex query with a JOIN:
+        SELECT songs.track, songs.title, albums.name FROM songs
+        INNER JOIN albums ON songs.album = albums._id;
+
+A query with pattern matching:
+        SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE songs.title LIKE "%doctor%"
+        ORDER BY artists.name, albums.name, songs.track;
+            ***     The "%doctor%" means any number of characters before or after the word doctor are allowed,
+            *** if we changed it to "doctor%" this means the field begins with the word doctor and can be
+            *** followed by any number of characters after that, or we could change it to "%doctor" which means
+            *** that the field can have any number of characters before hand as long as it ends with doctor.
+
+Create a 'view' to create a virtual database table that can be queried, but whos data can not be manipulated:
+        CREATE VIEW artist_list AS
+        SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE songs.title LIKE "%doctor%"
+        ORDER BY artists.name, albums.name, songs.track;
+
+Delete a view or a table:
+        DROP VIEW view_name;
+        DROP TABLE table_name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
