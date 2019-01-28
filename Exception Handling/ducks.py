@@ -1,5 +1,5 @@
 # This is a reiteration of an earlier file that utilizes type hints for the function definition at
-#   line 55.
+#       line 60.
 
 class Wing(object):
 
@@ -51,9 +51,23 @@ class Flock(object):
         self.flock = []
 
     # This provides the type hint if someone else were to use your function of what data type is
-    #   expected and what output is expected.
+    #       expected and what output is expected.
+    # You can also check the type of an object using type(objectName) which returns the exact type
+    #       of the object. This will not identify if the object being passed is a subclass however.
+    #       To check if the object is a certain type or a subclass of that type we can use
+    #       isinstance(objectName, TypeName).
+
     def add_duck(self, duck: Duck) -> None:
-        self.flock.append(duck)
+        fly_method = getattr(duck, 'fly', None)
+        if callable(fly_method):
+            self.flock.append(duck)
+        else:
+            raise TypeError("Cannot add duck, are you sure it isn't a " + str(type(duck).__name__))
+
+    # Another way to perform a check is:
+    #   def add_duck(self, duck: Duck) -> None:
+    #       if isinstance(duck, Duck):
+    #           self.flock.append(duck)
 
     def migrate(self):
         problem = None
@@ -70,15 +84,5 @@ class Flock(object):
 if __name__ == '__main__':
     donald = Duck()
     donald.fly()
-
-
-
-
-
-
-
-
-
-
 
 
